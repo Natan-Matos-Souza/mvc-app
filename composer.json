@@ -1,0 +1,27 @@
+{
+    "name": "natan/slim-framework",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Natan\\SlimFramework\\": "src/"
+        },
+        "files": [
+            "app/controller/Home.php",
+            "app/controller/Publish.php",
+            "app/services/Email.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Natan Matos",
+            "email": "natanmatos_18@hotmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^4.12",
+        "slim/psr7": "^1.6",
+        "vlucas/phpdotenv": "^5.5",
+        "phpmailer/phpmailer": "^6.8",
+        "slim/twig-view": "^3.3"
+    }
+}
