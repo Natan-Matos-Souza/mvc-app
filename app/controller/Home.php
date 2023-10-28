@@ -2,11 +2,21 @@
 
 namespace app\controller;
 
-class Home
+use app\view\View;
+use Slim\Views\Twig;
+
+class Home extends View
 {
     public function index($request, $response)
     {
-        $response->getBody()->write('Olá!');
+        
+        $this->setView('home.html');
+        
+
+        $this->getView()->render($response, self::$viewName, [
+            "firstName" => "Natan",
+            "lastName" => "Matos"
+        ]);
 
         return $response;
     }

@@ -3,13 +3,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Natan\\SlimFramework\\": "src/"
-        },
-        "files": [
-            "app/controller/Home.php",
-            "app/controller/Publish.php",
-            "app/services/Email.php"
-        ]
+            "app\\": "app"
+        }
     },
     "authors": [
         {
