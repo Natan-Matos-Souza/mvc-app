@@ -4,6 +4,7 @@ namespace app\controller;
 
 use app\view\View;
 use Slim\Views\Twig;
+use app\services\FlashMessage;
 
 class Home extends View
 {
@@ -12,10 +13,14 @@ class Home extends View
         
         $this->setView('index.html');
         
+        flashMessage::createErrorMessage('Você não possui permissão!');
 
         $this->getView()->render($response, self::$viewName, [
             "firstName" => "Natan",
-            "lastName" => "Matos"
+            "lastName" => "Matos",
+            "flashMessageType" => flashMessage::showFlashMessageType(),
+            "hasFlashMessage" => flashMessage::hasFlashMessage(),
+            "flashMessageText" => flashMessage::showFlashMessage()
         ]);
 
         return $response;
