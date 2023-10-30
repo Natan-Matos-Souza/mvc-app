@@ -2,9 +2,12 @@
 
 namespace app\controller;
 
-use services\Email;
+use app\services\Email;
+use app\view\View;
+use Slim\Views\Twig;
 
-class Publish
+
+class Publish extends View
 {
     public function index($request, $response)
     {

@@ -7,7 +7,7 @@ use Slim\Views\Twig;
 
 abstract class View
 {
-    static $pathToTemplates = '../controller/';
+    static $pathToTemplates = __DIR__;
     static $viewName;
 
     public function setView($view)

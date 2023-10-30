@@ -2,6 +2,10 @@
 
 $app->get('/', '\app\controller\Home:index');
 
-$app->get('/publicar', '\app\controller\Publish:index');
+$app->get('/publicar', '\app\controller\Post:create');
 
-$app->get('/posts/{id}', '\app\controller\Home:show');
+$app->post('/publicar', '\app\controller\Post:store');
+
+$app->get('/posts/{id}', '\app\controller\Post:list');
+
+$app->get('/posts', '\app\controller\Post:index');
