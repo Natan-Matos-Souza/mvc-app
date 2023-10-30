@@ -13,7 +13,7 @@ class Home extends View
         
         $this->setView('index.html');
         
-        flashMessage::createErrorMessage('Você não possui permissão!');
+        flashMessage::createSuccessMessage('Post criado com sucesso!');
 
         $this->getView()->render($response, self::$viewName, [
             "firstName" => "Natan",
