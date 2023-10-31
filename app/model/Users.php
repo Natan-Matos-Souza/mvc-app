@@ -2,7 +2,7 @@
 
 namespace model;
 
-class User
+class User extends Model
 {
     public static function isValid(array $userData)
     {
@@ -12,5 +12,10 @@ class User
     public static function userCreate(array $userData)
     {
         
+    }
+
+    public static function getUsersEmail()
+    {
+        return $this->database()->query('SELECT EMAIL from users')->fetch_all(MYSQLI_ASSOC);
     }
 }

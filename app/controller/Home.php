@@ -23,6 +23,8 @@ class Home extends View
             "flashMessageText" => flashMessage::showFlashMessage()
         ]);
 
+        flashMessage::destroy();
+
         return $response;
     }
 

@@ -6,11 +6,15 @@ use app\service\Email;
 use app\view\View;
 use Slim\Views\Twig;
 
-class Post
+class Post extends View
 {
-    public function index()
+    public function index($request, $response)
     {
+        $this->setView('index.html');
 
+        $this->getView()->render($response, self::$viewName);
+
+        return $response;
     }
 
     public function list($request, $response, $args)
@@ -24,7 +28,7 @@ class Post
 
     public function create()
     {
-
+        
     }
 
     public function store()

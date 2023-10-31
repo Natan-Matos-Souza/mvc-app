@@ -2,6 +2,8 @@
 
 $app->get('/', '\app\controller\Home:index');
 
+
+
 $app->get('/publicar', '\app\controller\Post:create');
 
 $app->post('/publicar', '\app\controller\Post:store');

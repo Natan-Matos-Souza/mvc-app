@@ -2,11 +2,13 @@
 
 namespace Model;
 
-class Model
+abstract class Model
 {
 
-    public static function database()
+    public function database()
     {
-        
+        $database = new \mysqli($_ENV['DATABASEHOST'], $_ENV['DATABASEUSER'], $_USER['DATABASEPASS'], $_ENV['DATABASE']);
+
+        return $database;
     }
 }

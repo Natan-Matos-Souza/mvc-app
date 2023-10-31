@@ -32,4 +32,9 @@ class FlashMessage
     {
         return $_SESSION['flashMessageType'];
     }
+
+    public static function destroy()
+    {
+        $_SESSION['hasFlashMessage'] = false;
+    }
 }
