@@ -27,13 +27,17 @@ class Login extends View
 
     public function auth($request, $response, $args)
     {
+
+        $userData = (object) $request->getParsedBody();
         
         FlashMessage::createErrorMessage('Dados inválidos!');
 
-
-
-
-
+        if (Admin::isValid($userData))
+        {
+            FlashMessage::createSuccessMessage('Usuário válido!');
+        } else {
+            FlashMessage::createErrorMessage('Usuário inválido!');
+        }
 
 
         return $response

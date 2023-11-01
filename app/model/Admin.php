@@ -9,34 +9,38 @@ class Admin extends Model
         
     }
 
-    public static function getAdminPermissions()
-    {
-
-    }
-
     public static function isValid(object $data)
     {
         $isValid = false;
         
 
-        $findUser = self::database()->query("SELECT password from admins WHERE email=$data->email");
+        $findUser = self::database()->query("SELECT password from admins WHERE email='$data->email'");
 
         if ($findUser->num_rows < 1)
         {
             return $isValid = false;
         }
 
-        $userPassword = $findUser->fetch_all(MYSQLI_ASSOC);
+        $userPassword = (object) $findUser->fetch_array(MYSQLI_ASSOC);
 
-        if (password_verify($data->password, $userPassword))
+
+        if (password_verify($data->password, $userPassword->password))
         {
             
-            $userInfo = (object) self::database()->query("SELECT * from admins WHERE email=$email")->fetch_all(MYSQLI_ASSOC);
-
+            $userInfo = (object) self::database()->query("SELECT * from admins WHERE email='$data->email'")->fetch_array(MYSQLI_ASSOC);
 
 
             $_SESSION['admin'] = true;
             $_SESSION['adminUsername'] = $userInfo->username;
+            $_SESSION['canCreatePosts'] = $userInfo->can_create_posts;
+            $_SESSION['canCreateUsers'] = $userInfo->can_create_users;
+            $_SESSION['canDeletePosts'] = $userInfo->can_delete_posts;
+
+            $isValid = true;
+
+            var_dump($_SESSION['canCreateUsers']);
+
+            return $isValid;
             
 
 
