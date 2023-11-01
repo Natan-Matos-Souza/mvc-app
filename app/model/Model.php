@@ -1,13 +1,13 @@
 <?php
 
-namespace Model;
+namespace app\model;
 
 abstract class Model
 {
 
-    public function database()
+    public static function database()
     {
-        $database = new \mysqli($_ENV['DATABASEHOST'], $_ENV['DATABASEUSER'], $_USER['DATABASEPASS'], $_ENV['DATABASE']);
+        $database = new \mysqli($_ENV['DATABASEHOST'], $_ENV['DATABASEUSER'], $_ENV['DATABASEPASS'], $_ENV['DATABASE']);
 
         return $database;
     }

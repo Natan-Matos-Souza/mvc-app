@@ -1,1 +1,11 @@
-{% extends 'templates/maintemplate.html'%}
+{% extends 'templates/maintemplate.html' %}
+
+
+{% block content %}
+
+    {% for data in email %}
+        <h2>{{ data['email'] }}</h2>
+    {% endfor %}
+
+
+{% endblock %}

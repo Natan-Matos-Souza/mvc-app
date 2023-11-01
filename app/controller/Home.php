@@ -5,6 +5,7 @@ namespace app\controller;
 use app\view\View;
 use Slim\Views\Twig;
 use app\services\FlashMessage;
+use app\model\Users;
 
 class Home extends View
 {
@@ -18,6 +19,7 @@ class Home extends View
         $this->getView()->render($response, self::$viewName, [
             "firstName" => "Natan",
             "lastName" => "Matos",
+            "email" => Users::getUsersEmail(),
             "flashMessageType" => flashMessage::showFlashMessageType(),
             "hasFlashMessage" => flashMessage::hasFlashMessage(),
             "flashMessageText" => flashMessage::showFlashMessage()

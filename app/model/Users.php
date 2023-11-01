@@ -1,8 +1,8 @@
 <?php
 
-namespace model;
+namespace app\model;
 
-class User extends Model
+class Users extends Model
 {
     public static function isValid(array $userData)
     {
@@ -16,6 +16,7 @@ class User extends Model
 
     public static function getUsersEmail()
     {
-        return $this->database()->query('SELECT EMAIL from users')->fetch_all(MYSQLI_ASSOC);
+        $data = self::database()->query('SELECT email from users')->fetch_all(MYSQLI_ASSOC);
+        return $data;
     }
 }
