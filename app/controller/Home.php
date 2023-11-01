@@ -13,8 +13,6 @@ class Home extends View
     {
         
         $this->setView('index.html');
-        
-        FlashMessage::createSuccessMessage('Post criado com sucesso!');
 
         $this->getView()->render($response, self::$viewName, [
             "firstName" => "Natan",
@@ -29,14 +27,4 @@ class Home extends View
 
         return $response;
     }
-
-    // public function show($request, $response, $args)
-    // {
-    //     $postId = $args['id'];
-
-    //     $response->getBody()->write($postId);
-
-    //     return $response;
-
-    // }
 }

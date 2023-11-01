@@ -13,3 +13,7 @@ $app->get('/posts/{id}', '\app\controller\Post:list');
 $app->get('/posts', '\app\controller\Post:index');
 
 $app->get('/cadastrar', '\app\controller\User:create');
+
+$app->get('/login', '\app\controller\Login:index');
+
+$app->post('/login', '\app\controller\Login:auth');

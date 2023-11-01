@@ -1,0 +1,18 @@
+{% extends 'templates/maintemplate.html' %}
+
+{% block content %}
+    <form action="http://localhost:8082/login" method="POST">
+        <label for="email">Email:</label>
+        <input type="email"  name="email" id="email">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <input type="checkbox" name="create-user-permission" id="create-user-permission">
+        <label for="create-user-permission">Permissão para criar usuários</label>
+        <input type="submit" value="Enviar">
+    </form>
+
+
+    <script>
+        
+    </script>
+{% endblock %}
