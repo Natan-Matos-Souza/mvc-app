@@ -11,3 +11,5 @@ $app->post('/publicar', '\app\controller\Post:store');
 $app->get('/posts/{id}', '\app\controller\Post:list');
 
 $app->get('/posts', '\app\controller\Post:index');
+
+$app->get('/cadastrar', '\app\controller\User:create');

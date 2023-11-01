@@ -14,7 +14,7 @@ class Home extends View
         
         $this->setView('index.html');
         
-        flashMessage::createSuccessMessage('Post criado com sucesso!');
+        FlashMessage::createSuccessMessage('Post criado com sucesso!');
 
         $this->getView()->render($response, self::$viewName, [
             "firstName" => "Natan",
@@ -25,18 +25,18 @@ class Home extends View
             "flashMessageText" => flashMessage::showFlashMessage()
         ]);
 
-        flashMessage::destroy();
+        FlashMessage::destroy();
 
         return $response;
     }
 
-    public function show($request, $response, $args)
-    {
-        $postId = $args['id'];
+    // public function show($request, $response, $args)
+    // {
+    //     $postId = $args['id'];
 
-        $response->getBody()->write($postId);
+    //     $response->getBody()->write($postId);
 
-        return $response;
+    //     return $response;
 
-    }
+    // }
 }

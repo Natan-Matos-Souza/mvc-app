@@ -21,7 +21,9 @@ class Post extends View
     {
         $postId = $args['id'];
 
-        $response->getBody()->write($postId);
+        $this->setView('post.html');
+
+        $this->getView()->render($response, self::$viewName);
 
         return $response;
     }
