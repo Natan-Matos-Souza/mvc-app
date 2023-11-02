@@ -4,6 +4,7 @@ namespace app\controller;
 
 use app\view\View;
 use app\services\FlashMessage;
+use app\model\Users;
 
 
 class User extends View
@@ -12,8 +13,7 @@ class User extends View
     public function create($request, $response)
     {
 
-        FlashMessage::createSuccessMessage('Cadastrado com sucesso!');
-
+        
         $this->setView('cadastro.html');
 
         $this->getView()->render($response, self::$viewName, [
@@ -22,12 +22,28 @@ class User extends View
             "flashMessageText" => FlashMessage::showFlashMessage()
         ]);
 
+        FlashMessage::destroy();
+
         return $response;
     }
 
-    public function store()
+    public function store($request, $response)
     {
+        $data = (object) $request->getParsedBody();
 
+        if (Users::isValid($data))
+        {
+            Users::createUser($data);
+            FlashMessage::createSuccessMessage('Usuário criado com sucesso!');
+        } else {
+            
+            FlashMessage::createErrorMessage('E-mail incorreto!');
+
+        }
+
+        return $response
+        ->withHeader('Location', 'http://localhost:8082/cadastrar')
+        ->withStatus(301);
     }
 
 
