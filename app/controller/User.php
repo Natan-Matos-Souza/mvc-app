@@ -35,10 +35,6 @@ class User extends View
         {
             Users::createUser($data);
             FlashMessage::createSuccessMessage('Usuário criado com sucesso!');
-        } else {
-            
-            FlashMessage::createErrorMessage('E-mail incorreto!');
-
         }
 
         return $response

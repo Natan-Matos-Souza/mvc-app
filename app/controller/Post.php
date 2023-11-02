@@ -19,11 +19,12 @@ class Post extends View
 
     public function list($request, $response, $args)
     {
-        $postId = $args['id'];
-
+        
         $this->setView('post.html');
 
-        $this->getView()->render($response, self::$viewName);
+        $this->getView()->render($response, self::$viewName, [
+            "id" => $args['id']
+        ]);
 
         return $response;
     }
