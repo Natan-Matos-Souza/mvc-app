@@ -15,4 +15,6 @@ Após isso, inicie a aplicação com o comando:
 
      php -S localhost:8082 -t app/public
 
-Infelizmente, esse projeto não possui uma **_migration_** para a criação de tabelas automatizadas. Em breve, trabalharei nisso.
+Para que a aplicação funcione corretamente, é necessário utilizar a **_migration_** do projeto. Para isso, certifique-se de que todas as informações do banco de dados MySQL estejam declaradas no arquivo **_.env_** e execute o comando:
+        
+    php migration.php create
