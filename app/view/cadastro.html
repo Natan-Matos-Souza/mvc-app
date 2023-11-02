@@ -1,0 +1,36 @@
+{% extends 'templates/maintemplate.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="/assets/style/cadastro.css">
+
+<div class="form-container">
+    <div class="form-title">
+      <h2 class="form-title-h2">Cadastre-se</h2>
+      <p class="form-title-p">Cadastre-se para ficar por dentro das novidades!</p>
+    </div>
+
+      <div class="form-area">
+        <form action="http://localhost:8082" method="POST">
+          <div class="useremail-area">
+            <label for="useremail">Digite o seu melhor e-mail:</label>
+            <input type="email" class="text-input" name="useremail" id="" placeholder="Seu e-mail">
+          </div>
+
+          <div class="username-area">
+            <label for="username">Digite seu nome:</label>
+            <input type="text" name="username" class="text-input" placeholder="Como quer ser chamado">
+          </div>
+
+          <div class="checkbox-area">
+            <input type="checkbox" name="" id="accept-form" required>
+            <label for="accept-form" class="checkbox-label" >Aceito receber e-mails</label>
+          </div>
+
+          <input type="submit" value="Cadastrar" id="submit-btn">
+        </form>
+      </div>
+  </div>
+
+
+{% endblock %}

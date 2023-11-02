@@ -1,0 +1,86 @@
+.form-container {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.form-title {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    color: #4F4557;
+}
+
+.form-title-h2 {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.form-title-p {
+    padding: 8px;
+    font-weight: 300;
+}
+
+.form-area {
+    padding: 30px;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 40px !important;
+    width: 40%;
+    background-color: #4F4557;
+    margin: auto;
+    text-align: center;
+    border-radius: 4px;
+    height: 300px;
+    overflow: hidden;
+}
+
+.useremail-area, .username-area {
+    color: #F4EEE0;
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-input {
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+}
+
+.checkbox-area {
+    padding: 5px;
+}
+
+.checkbox-label {
+    color: #F4EEE0;
+}
+
+#submit-btn:hover {
+    transition: 500ms;
+    opacity: .5;
+    cursor: pointer;
+}
+
+#submit-btn {
+    transition: 500ms;
+    border-radius: 4px;
+    padding: 8px;
+    color: #fff;
+    font-weight: 400;
+    border: none;
+    background-color: #A7D397;
+}
+
+@media screen and (max-width: 800px) {
+    .form-title {
+        width: 80%;
+    }
+
+    .form-area {
+        width: 60%;
+        height: 300px;
+    }
+}

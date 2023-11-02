@@ -14,7 +14,7 @@ class User extends View
 
         FlashMessage::createSuccessMessage('Cadastrado com sucesso!');
 
-        $this->setView('index.html');
+        $this->setView('cadastro.html');
 
         $this->getView()->render($response, self::$viewName, [
             "hasFlashMessage" => FlashMessage::hasFlashMessage(),
