@@ -22,10 +22,11 @@ class Post extends View
         
         $this->setView('post.html');
 
-        $this->getView()->render($response, self::$viewName, [
-            "id" => $args['id']
-        ]);
+        // $this->getView()->render($response, self::$viewName, [
+        //     "postInfo" => Post::getPost($args['id'])
+        // ]);
 
+        var_dump($_SESSION);
         return $response;
     }
 

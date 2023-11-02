@@ -12,7 +12,6 @@ class User extends View
 
     public function create($request, $response)
     {
-
         
         $this->setView('cadastro.html');
 
