@@ -72,8 +72,6 @@ class Post extends View
             "postDate" => date('Y/m/d')
         ];
 
-        // var_dump($data->postContent);
-
 
         if (Posts::validateFields($data))
         {

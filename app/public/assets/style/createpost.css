@@ -1,0 +1,39 @@
+.title {
+    margin: 40px auto;
+    width: 80%;
+    text-align: center;
+    color: #4F4557;
+}
+
+.form-area {
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.post-title-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+}
+
+.post-title-label label {
+    color: #4F4557;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.post-title-input {
+    width: 100%;
+}
+
+#post-title {
+    border: .5px solid #4F4557;
+    padding: 8px;
+    width: 100%;
+    border-radius: 4px;
+}

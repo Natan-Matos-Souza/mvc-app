@@ -1,11 +1,46 @@
 {% extends 'templates/dashboardtemplate.html' %}
 
 {% block content %}
-    <form action="http://localhost:8082/dashboard/post" method="POST">
-        <label for="post-title">Título</label>
-        <input type="text" name="post-title" id="post-title">
-        <label for="post-content">Conteúdo</label>
-        <textarea name="post-content" id="post-content" cols="30" rows="10"></textarea>
-        <input type="submit" value="Enviar">
-    </form>
+    <link rel="stylesheet" href="/assets/style/createpost.css">
+
+    <div class="title">
+      <h2>Criar Post</h2>
+    </div>
+
+    <div class="form-area">
+      <form action="http://localhost:8082/dashboard/post" method="POST">
+
+        <div class="post-title-area">
+
+          <div class="post-title-label">
+            <label for="post-title">Título:</label>
+          </div>
+
+          <div class="post-title-input">
+            <input type="text" name="post-title" id="post-title">
+          </div>
+
+        </div>
+
+        <div class="post-content-area">
+
+          <div class="post-content-label">
+            <label for="post-content">Conteúdo:</label>
+          </div>
+
+          <div class="post-content-input">
+            <textarea name="post-content" id="post-content"></textarea>
+          </div>
+
+          <div class="submit-btn-area">
+            <input type="submit" value="Postar">
+          </div>
+
+        </div>
+
+
+
+      </form>
+    </div>
+
 {% endblock %}
