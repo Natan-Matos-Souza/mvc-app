@@ -15,11 +15,11 @@ class Dashboard extends View
             ->withStatus(301);
         }
 
-        $this->setView('index.html');
+        $this->setView('dashboard.html');
 
 
         $this->getView()->render($response, self::$viewName, [
-
+            "userName" => $_SESSION['adminUsername']
         ]);
 
 

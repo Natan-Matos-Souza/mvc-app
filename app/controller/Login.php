@@ -35,6 +35,9 @@ class Login extends View
         if (Admin::isValid($userData))
         {
             FlashMessage::createSuccessMessage('Usuário válido!');
+            return $response
+            ->withHeader('Location', 'http://localhost:8082/dashboard')
+            ->withStatus(302);
         } else {
             FlashMessage::createErrorMessage('Usuário inválido!');
         }
