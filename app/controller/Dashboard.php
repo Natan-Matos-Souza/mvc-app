@@ -3,6 +3,7 @@
 namespace app\controller;
 
 use app\view\View;
+use app\services\FlashMessage;
 
 class Dashboard extends View
 {
@@ -19,8 +20,13 @@ class Dashboard extends View
 
 
         $this->getView()->render($response, self::$viewName, [
-            "userName" => $_SESSION['adminUsername']
+            "userName" => $_SESSION['adminUsername'],
+            "hasFlashMessage" => FlashMessage::hasFlashMessage(),
+            "flashMessageType" => FlashMessage::showFlashMessageType(),
+            "flashMessageText" => FlashMessage::showFlashMessage()
         ]);
+
+        FlashMessage::destroy();
 
 
         return $response;

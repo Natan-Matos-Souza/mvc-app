@@ -1,0 +1,57 @@
+.admin-painel {
+    width: 100%;
+    margin: 20vh auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.first-group, .second-group {
+    width: 40%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.container:hover {
+    transition: 500ms;
+    opacity: .5;
+}
+
+.container {
+    transition: 500ms;;
+    padding: 40px;
+    background-color: #4F4557;
+    text-decoration: none;
+    color: #F4EEE0;
+}
+
+@media screen and (max-width: 800px) {
+    .first-group, .second-group {
+        width: 40%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .admin-painel {
+        margin: 10vh auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+
+@media screen and (max-width: 300px) {
+    .container span {
+        font-size: 14px;
+    }
+}
