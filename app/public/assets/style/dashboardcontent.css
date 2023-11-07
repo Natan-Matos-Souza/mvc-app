@@ -1,5 +1,5 @@
 .admin-painel {
-    width: 100%;
+    width: 80%;
     margin: 20vh auto;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,7 @@
 
 @media screen and (max-width: 800px) {
     .first-group, .second-group {
-        width: 40%;
+        width: 60%;
         text-align: center;
         display: flex;
         flex-direction: column;
