@@ -15,6 +15,8 @@ $app->post('/login', '\app\controller\Login:auth');
 $app->get('/logout', '\app\controller\Logout:logout');
 
 $app->get('/dashboard', '\app\controller\Dashboard:index');
+$app->get('/dashboard/post', '\app\controller\Post:create');
+$app->post('/dashboard/post', '\app\controller\Post:store');
 
 
 $app->get('/api/posts/{id}', '\app\controller\PostsApi:list');

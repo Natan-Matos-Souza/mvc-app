@@ -1,0 +1,11 @@
+{% extends 'templates/dashboardtemplate.html' %}
+
+{% block content %}
+    <form action="http://localhost:8082/dashboard/post" method="POST">
+        <label for="post-title">Título</label>
+        <input type="text" name="post-title" id="post-title">
+        <label for="post-content">Conteúdo</label>
+        <textarea name="post-content" id="post-content" cols="30" rows="10"></textarea>
+        <input type="submit" value="Enviar">
+    </form>
+{% endblock %}
