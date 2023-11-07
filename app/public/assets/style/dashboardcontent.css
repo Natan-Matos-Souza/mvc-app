@@ -24,11 +24,19 @@
 }
 
 .container {
-    transition: 500ms;;
-    padding: 40px;
+    border: none;
+    border-radius: 4px;
+    transition: 500ms;
+    padding: 25px;
+    height: 160px;
     background-color: #4F4557;
     text-decoration: none;
     color: #F4EEE0;
+}
+
+.container img {
+    height: 80px;
+    margin: 0px auto 20px;
 }
 
 @media screen and (max-width: 800px) {
