@@ -22,6 +22,8 @@ $app->post('/dashboard/post', '\app\controller\Post:store');
 $app->get('/api/posts/{id}', '\app\controller\PostsApi:list');
 $app->get('/api/posts/', '\app\controller\PostsApi:index');
 
+$app->get('/favorites', '\app\controller\Favorites:index');
+
 $app->get('/debug', function($request, $response) {
     var_dump($_SESSION);
 

@@ -1,0 +1,57 @@
+.post-container-area {
+    font-family: 'Roboto', sans-serif;
+    width: 60%;
+    margin: 40px auto;
+}
+
+.post-container-area a:hover {
+    transition: 500ms;
+    opacity: .8;
+}
+/* 
+.post-container-area a {
+    transition: 500ms;
+    padding: 8px;
+    text-decoration: none
+} */
+
+.post-container {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0px auto 16px;
+    padding: 22px;
+    background-color: #4F4557;
+    color: #F4EEE0;   
+}
+
+.like-btn-area {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.like-btn:hover {
+    transition: 500ms;
+    cursor: pointer;
+    opacity: 0.2;
+}
+
+.like-btn {
+    transition: 500ms;
+    height: 40px;
+}
+
+.post-title-area h2 {
+    font-weight: 400;
+    font-size: 32px;
+}
+
+.post-content-area p {
+    font-weight: 300;
+}
+
+.post-info-area {
+    text-align: center;
+}
