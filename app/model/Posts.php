@@ -48,12 +48,15 @@ class Posts extends Model
             {
                 foreach($posts[$post] as $key => $data)
                 {
-                    $posts[$post][$key] = mb_strimwidth($posts[$post][$key], 0, $limit, '...');
+                    if ($key == 'post_content' || $key == 'post_title')
+                    {
+                        $posts[$post][$key] = mb_strimwidth($posts[$post][$key], 0, $limit, '...');
+                    }
                 }
             }
 
             return $posts;
-            
+
         } else {
             return $posts = self::database()
             ->query("SELECT * FROM posts")
