@@ -35,8 +35,30 @@ class Posts extends Model
             )");
     }
 
-    public static function getAllPosts()
+    public static function getAllPosts(int $limit = 0): array
     {
-        
+        if ($limit)
+        {
+            $posts = self::database()
+            ->query("SELECT * FROM posts")
+            ->fetch_all(MYSQLI_ASSOC);
+
+
+            foreach ($posts as $post => $data)
+            {
+                foreach($posts[$post] as $key => $data)
+                {
+                    $posts[$post][$key] = mb_strimwidth($posts[$post][$key], 0, $limit, '...');
+                }
+            }
+
+            return $posts;
+            
+        } else {
+            return $posts = self::database()
+            ->query("SELECT * FROM posts")
+            ->fetch_all(MYSQLI_ASSOC);
+        }
+
     }
 }

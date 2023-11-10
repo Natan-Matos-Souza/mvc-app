@@ -12,9 +12,15 @@ class Post extends View
 {
     public function index($request, $response)
     {
-        $this->setView('index.html');
+        $this->setView('posts.html');
 
-        $this->getView()->render($response, self::$viewName);
+        $posts = Posts::getAllPosts(25);
+
+        // var_dump($posts);
+
+        $this->getView()->render($response, self::$viewName, [
+            "posts" => $posts
+        ]);
 
         return $response;
     }
