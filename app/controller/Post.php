@@ -19,16 +19,16 @@ class Post extends View
         return $response;
     }
 
-    public function list($request, $response, $args)
+    public function show($request, $response, $args)
     {
         
         $this->setView('post.html');
 
-        // $this->getView()->render($response, self::$viewName, [
-        //     "postInfo" => Post::getPost($args['id'])
-        // ]);
+        $this->getView()->render($response, self::$viewName, [
+            "postId" => $args['id']
+        ]);
 
-        var_dump($_SESSION);
+        
         return $response;
     }
 
