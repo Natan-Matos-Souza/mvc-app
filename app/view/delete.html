@@ -1,0 +1,36 @@
+{% extends 'templates/dashboardtemplate.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="/assets/style/delete.css">
+
+    <div class="post-container-area">
+
+        {% for post in posts %}
+
+            
+
+        <div class="post-container" id="post-{{ post['id'] }}">
+
+            <div class="delete-btn-area">
+                <img src="/assets/icons/trash.png" alt="like button" class="delete-btn">
+            </div>
+
+            <div class="post-title-area">
+                <h2>{{ post['post_title'] }}</h2>
+            </div>
+
+            <div class="post-content-area">
+                <p>{{ post['post_content'] }}</p>
+            </div>
+
+            <div class="post-info-area">
+                <span>{{ post['post_author'] }} - {{ post['post_data'] }}</span>
+            </div>
+        </div>
+            
+
+        {% endfor %}
+
+    </div>
+{% endblock %}

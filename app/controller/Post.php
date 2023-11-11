@@ -25,6 +25,27 @@ class Post extends View
         return $response;
     }
 
+    public function destroy($request, $response, $args)
+    {
+
+    }
+
+    public function delete($request, $response, $args)
+    {
+
+        $posts = Posts::getAllPosts(25);
+
+        // var_dump($posts);
+
+        $this->setView('delete.html');
+
+        $this->getView()->render($response, self::$viewName, [
+            "posts" => $posts
+        ]);
+
+        return $response;
+    }
+
     public function show($request, $response, $args)
     {
         

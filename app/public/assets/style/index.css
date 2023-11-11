@@ -38,6 +38,7 @@
 
 
   .nav-area {
+    z-index: 20;
     position: absolute;
     right: 10%;
     top: 30%;
