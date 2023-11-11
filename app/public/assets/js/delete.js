@@ -17,8 +17,8 @@ deleteBtn.forEach(element => {
                 id: postId
             },
             dataType: 'JSON'
-        }).done(function(result) {
-            console.log(result);
+        }).done(function() {
+            parentElement.remove();
         });
     });
 });
