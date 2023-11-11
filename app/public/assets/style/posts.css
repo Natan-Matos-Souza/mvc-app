@@ -8,12 +8,7 @@
     transition: 500ms;
     opacity: .8;
 }
-/* 
-.post-container-area a {
-    transition: 500ms;
-    padding: 8px;
-    text-decoration: none
-} */
+
 
 .post-container {
     position: relative;

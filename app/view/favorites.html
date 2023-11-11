@@ -6,34 +6,14 @@
 
     <div class="post-container-area">
 
-        {% for post in posts %}
-
-            
-
-        <div class="post-container" id="post-{{ post['id'] }}">
-
-            <div class="like-btn-area">
-                <img src="/assets/icons/star.svg" alt="like button" class="like-btn">
-            </div>
-
-            <div class="post-title-area">
-                <h2>{{ post['post_title'] }}</h2>
-            </div>
-
-            <div class="post-content-area">
-                <p>{{ post['post_content'] }}</p>
-            </div>
-
-            <div class="post-info-area">
-                <span>{{ post['post_author'] }} - {{ post['post_data'] }}</span>
-            </div>
-        </div>
-            
-
-        {% endfor %}
 
     </div>
     
-    <script src="/assets/js/postlike.js"></script>
+    <!-- <script src="/assets/js/postlike.js"></script> -->
 
+{% endblock %}
+
+{% block scripts %}
+
+<script src="/assets/js/favorite.js"></script>
 {% endblock %}

@@ -19,9 +19,33 @@ class Posts extends Model
         return $isValid;
     }
 
-    public static function getPost(int $id)
+    public static function getPost(int $id, $limit=0)
     {
+        if ($limit)
+        {
 
+            $data = self::database()
+                ->query("SELECT * FROM posts WHERE id='$id'")
+                ->fetch_all(MYSQLI_ASSOC);
+
+            foreach ($data as $post => $content)
+            {
+                foreach ($data[$post] as $key => $content)
+                {
+                    if ($key == 'post_content' || $key == 'post_title')
+                    {
+                        $data[$post][$key] = mb_strimwidth($data[$post][$key], 0, $limit, '...');
+                    }
+                }
+            }
+
+            return $data;
+
+        } else {
+            return self::database()
+            ->query("SELECT * FROM posts WHERE id='$id'")
+            ->fetch_all(MYSQLI_ASSOC);
+        }
     }
 
     public static function create(object $data)
