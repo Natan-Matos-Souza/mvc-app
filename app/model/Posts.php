@@ -4,6 +4,20 @@ namespace app\model;
 
 class Posts extends Model
 {
+
+    public static function deletePost(int $id)
+    {
+        try {
+            self::database()
+            ->query("DELETE FROM posts WHERE id=$id");
+
+            return true;
+        } catch (Exception $e)
+        {
+            return false;
+        }
+    }
+
     public static function validateFields(object $data)
     {
         $isValid = true;

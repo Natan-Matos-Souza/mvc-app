@@ -25,8 +25,26 @@ class Post extends View
         return $response;
     }
 
-    public function destroy($request, $response, $args)
+    public function destroy($request, $response)
     {
+        if (!$_SESSION['admin'] && !$_SESSION['canDeletePosts'])
+        {
+            return $response
+            ->withStatus(401);
+        }
+
+        $data = (int) explode("=", $request->getBody()->getContents())[1];
+
+        if (Posts::deletePost($data))
+        {
+            return $response
+            ->withStatus(204);
+        } else {
+            return $response
+            ->withStatus(500);
+        }
+
+
 
     }
 
@@ -35,15 +53,24 @@ class Post extends View
 
         $posts = Posts::getAllPosts(25);
 
-        // var_dump($posts);
-
         $this->setView('delete.html');
 
         $this->getView()->render($response, self::$viewName, [
-            "posts" => $posts
+            "posts" => $posts,
+            "userName" => $_SESSION['adminUsername']
         ]);
 
-        return $response;
+        if ($_SESSION['admin'] && $_SESSION['canDeletePosts'])
+        {
+            return $response;
+        } else {
+
+            FlashMessage::createErrorMessage('Você não possui permissão!');
+
+            return $response
+            ->withHeader('Location', 'http://localhost:8082/dashboard')
+            ->withStatus(301);
+        }
     }
 
     public function show($request, $response, $args)

@@ -15,8 +15,10 @@ $app->get('/logout', '\app\controller\Logout:logout');
 $app->get('/dashboard', '\app\controller\Dashboard:index');
 $app->get('/dashboard/post', '\app\controller\Post:create');
 $app->post('/dashboard/post', '\app\controller\Post:store');
-$app->delete('/dashboard/post/apagar', '\app\controller\Post:delete');
+$app->delete('/dashboard/post/apagar', '\app\controller\Post:destroy');
 $app->get('/dashboard/post/apagar', '\app\controller\Post:delete');
+
+
 
 $app->get('/api/posts/{id}', '\app\controller\PostsApi:list');
 $app->get('/api/posts/', '\app\controller\PostsApi:index');
