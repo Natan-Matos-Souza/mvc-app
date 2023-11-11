@@ -11,6 +11,7 @@ function getLikePostsId() {
 }
 
 async function getPostsInfo(postsId) {
+
   postsId.map((e) => {
     $.ajax({
       url: `http://localhost:8082/api/posts/${e}`,
@@ -20,12 +21,15 @@ async function getPostsInfo(postsId) {
       const data = result[0];
 
       renderPost(data);
-      likeBtn = document.querySelectorAll('.like-btn');
+      setTimeout(() => {
+        unlikePost(data.id);
+      }, 1* 1000);
+
     });
   });
 }
 
-function renderPost(data) {
+async function renderPost(data) {
   const postArea = document.querySelector(".post-container-area");
 
   postArea.innerHTML += `<div class="post-container" id="post-${data.id}">
@@ -50,25 +54,29 @@ function renderPost(data) {
 
 getPostsInfo(getLikePostsId());
 
-setTimeout(() => {
-  likeBtn = document.querySelectorAll('.like-btn');
+function unlikePost(id)
+{
+  
+  const postContainer = document.getElementById(`post-${id}`);
 
-  likeBtn.forEach(element => {
+  const likeBtn = postContainer.firstElementChild.firstElementChild;
 
-    element.addEventListener('click', e => {
-      const target = e.target;
+  likeBtn.addEventListener('click', () => {
+    postContainer.remove();
 
-      const parentElement = target.parentElement.parentElement;
-      const postId = parentElement.getAttribute('id').split('-')[1];
+    let likedPosts = localStorage.getItem('likedPostsId').split(',');
 
-      parentElement.remove();
-
-      console.log(postId);
+    likedPosts = likedPosts.filter(element => {
+      
+      if (element == id) return false;
+      else return true;
 
     });
 
+    localStorage.setItem('likedPostsId', likedPosts);
+
+
   });
 
-}, 2 * 1000);
-
+}
 
