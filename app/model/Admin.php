@@ -2,6 +2,8 @@
 
 namespace app\model;
 
+use app\services\FlashMessage;
+
 class Admin extends Model
 {
 
@@ -29,26 +31,38 @@ class Admin extends Model
 
     public static function createAdmin(object $data)
     {
-        self::database()
-        ->query(
-            "INSERT INTO admins (
-                email,
-                username,
-                password,
-                can_create_posts,
-                can_delete_posts,
-                can_create_posts
-                can_delete_users
-            ) VALUES (
-                '$data->email',
-                '$data->username',
-                '$data->password',
-                '$data->canCreatePosts',
-                '$data->canDeletePosts',
-                '$data->canCreateUsers',
-                '$data->canDeleteUsers'
-            )"
-        );
+        $data->password = password_hash($data->password, PASSWORD_BCRYPT);
+
+        $findEmail = self::database()
+        ->query("SELECT email FROM admins WHERE email='$data->useremail'");
+
+        if (!$findEmail->num_rows > 0)
+        {
+            self::database()
+            ->query(
+                "INSERT INTO admins (
+                    email,
+                    username,
+                    password,
+                    can_create_posts,
+                    can_delete_posts,
+                    can_create_users,
+                    can_delete_users
+                ) VALUES (
+                    '$data->useremail',
+                    '$data->username',
+                    '$data->password',
+                    '$data->canCreatePosts',
+                    '$data->canDeletePosts',
+                    '$data->canCreateUsers',
+                    '$data->canDeleteUsers'
+                )"
+            );
+
+            FlashMessage::createSuccessMessage('Usuário criado com sucesso!');
+        } else {
+            FlashMessage::createErrorMessage('E-mail já cadastrado!');
+        }
     }
 
     public static function isValid(object $data)

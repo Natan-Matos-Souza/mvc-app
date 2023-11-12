@@ -4,69 +4,67 @@ namespace app\controller;
 
 use app\view\View;
 use app\services\FlashMessage;
+use app\model\Admin as AdminModel;
 
 class Admin extends View
 {
     public function store($request, $response)
     {
         
-        $isValid = true;
-
-        $data = [];
-
-        $mandatoryFields = [
-            "username",
-            "useremail",
-            "password"
-        ];
-
-        $permissions = [
-            "canCreatePosts",
-            "canDeletePosts",
-            "canCreateUsers",
-            "canDeleteUsers"
-        ];
-
-        foreach ($mandatoryFields as $field)
+        if (!$_SESSION['canCreateUsers'])
         {
-            $sentData = $request->getParsedBody();
-
-            if ($sentData[$field])
-            {
-                $data[$field] = $sentData[$field];
-            } else {
-                $isValid = false;
-            }
-        }
-
-        
-
-        foreach ($permissions as $permission)
-        {
-            $sentData = $request->getParsedBody();
-
-            (isSet($sentData[$permission])) ? $data[$permission] = $sentData[$permission] : $data[$permission] = false;
-        }
-
-        if ($isValid)
-        {
-            var_dump($data);    
-        } else {
-
-            FlashMessage::createErrorMessage('Preencha todos os campos obrigatórios!');
+            FlashMessage::createErrorMessage('Você não possui permissão!');
 
             return $response
             ->withHeader('Location', 'http://localhost:8082/dashboard')
             ->withStatus(301);
         }
 
-        return $response;
+        $mandatoryFields = [
+            'username',
+            'useremail',
+            'password'
+        ];
+
+        foreach ($mandatoryFields as $fields)
+        {
+            $data[$fields] = $request->getParsedBody()[$fields];
+        }
+
+        $permissions = [
+            "canCreatePosts",
+            "canDeletePosts",
+            "canCreateUsers",
+            "canDeleteUsers"
+        ];        
+
+        foreach ($permissions as $permission)
+        {
+            $sentData = $request->getParsedBody();
+
+            (isSet($sentData[$permission])) ? $data[$permission] = true : $data[$permission] = 0;
+        }
+
+        if (AdminModel::isDataValid((object) $data))
+        {
+           
+            AdminModel::createAdmin((object) $data);
+
+        } else {
+
+            FlashMessage::createErrorMessage('Preencha todos os campos obrigatórios!');
+        }
+
+        return $response
+        ->withHeader('Location', 'http://localhost:8082/dashboard')
+        ->withStatus(301);
+
 
     }
 
     public function create($request, $response, $args)
     {
-        if (!$_SESSION['admin'] && !$_SESSION['canCreateUsers'])
+        if (!$_SESSION['canCreateUsers'])
         {
             FlashMessage::createErrorMessage('Você não possui permissão!');
 
