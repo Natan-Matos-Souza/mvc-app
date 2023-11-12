@@ -1,0 +1,35 @@
+{% extends 'templates/dashboardtemplate.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="/assets/style/createusers.css">
+
+    <h2 class="form-title">Criar Usuário</h2>
+
+    <div class="form-area">
+        <form action="http://localhost:8082/dashboard/user" method="POST">
+            <label for="username">Digite o nome do usuário: </label>
+            <input type="text" name="username" id="username">
+
+            <label for="useremail">Digite o e-mail: </label>
+            <input type="email" name="useremail" id="useremail">
+
+            <label for="password">Senha: </label>
+            <input type="password" name="password" id="password">
+
+            <input type="checkbox" value="1" id="can-create-posts" name="canCreatePosts">
+            <label for="can-create-posts">Pode criar posts.</label>
+
+            <input type="checkbox" value="1" id="can-delete-posts" name="canDeletePosts">
+            <label for="can-delete-posts">Pode apagar posts.</label>
+
+            <input type="checkbox" value="1" id="can-create-users" name="canCreateUsers">
+            <label for="can-create-users">Pode criar usuários.</label>
+
+            <input type="checkbox" default value="1" id="can-delete-users" name="canDeleteUsers">
+            <label for="can-delete-users">Pode apagar usuários.</label>
+
+            <input type="submit" value="Cadastrar">
+        </form>
+    </div>
+{% endblock %}

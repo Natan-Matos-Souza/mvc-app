@@ -17,13 +17,15 @@ $app->get('/dashboard/post', '\app\controller\Post:create');
 $app->post('/dashboard/post', '\app\controller\Post:store');
 $app->delete('/dashboard/post/apagar', '\app\controller\Post:destroy');
 $app->get('/dashboard/post/apagar', '\app\controller\Post:delete');
-
+$app->get('/dashboard/user', '\app\controller\Admin:create');
 
 
 $app->get('/api/posts/{id}', '\app\controller\PostsApi:list');
 $app->get('/api/posts/', '\app\controller\PostsApi:index');
 
 $app->get('/favorites', '\app\controller\Favorites:index');
+
+$app->post('/dashboard/user', '\app\controller\Admin:store');
 
 $app->get('/debug', function($request, $response) {
     var_dump($_SESSION);

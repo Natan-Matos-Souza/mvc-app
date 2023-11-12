@@ -4,9 +4,51 @@ namespace app\model;
 
 class Admin extends Model
 {
-    public static function createAdmin()
+
+    public static function isDataValid(object $data)
     {
-        
+        $isValid = true;
+
+        $mandatoryFields = [
+            'username',
+            'useremail',
+            'password'
+        ];
+
+        foreach ($mandatoryFields as $fields)
+        {
+            if (!$data->$fields)
+            {
+                $isValid = false;
+            }
+        }
+
+        return $isValid;
+
+    }
+
+    public static function createAdmin(object $data)
+    {
+        self::database()
+        ->query(
+            "INSERT INTO admins (
+                email,
+                username,
+                password,
+                can_create_posts,
+                can_delete_posts,
+                can_create_posts
+                can_delete_users
+            ) VALUES (
+                '$data->email',
+                '$data->username',
+                '$data->password',
+                '$data->canCreatePosts',
+                '$data->canDeletePosts',
+                '$data->canCreateUsers',
+                '$data->canDeleteUsers'
+            )"
+        );
     }
 
     public static function isValid(object $data)
@@ -50,5 +92,9 @@ class Admin extends Model
 
     }
 
-
+    public static function deleteAdmin($id)
+    {
+        self::database()
+        ->query("DELETE FROM admins WHERE id=$id");
+    }
 }
