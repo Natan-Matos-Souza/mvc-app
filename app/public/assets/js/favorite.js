@@ -12,21 +12,29 @@ function getLikePostsId() {
 
 async function getPostsInfo(postsId) {
 
-  postsId.map((e) => {
-    $.ajax({
-      url: `http://localhost:8082/api/posts/${e}`,
-      type: "GET",
-      dataType: "JSON",
-    }).done(function (result) {
-      const data = result[0];
+  console.log([] == false);
 
-      renderPost(data);
-      setTimeout(() => {
-        unlikePost(data.id);
-      }, 1* 1000);
-
+  if (postsId.length > 0)
+  {
+    postsId.map((e) => {
+      $.ajax({
+        url: `http://localhost:8082/api/posts/${e}`,
+        type: "GET",
+        dataType: "JSON",
+      }).done(function (result) {
+        const data = result[0];
+  
+        renderPost(data);
+        setTimeout(() => {
+          unlikePost(data.id);
+        }, 1* 1000);
+  
+      });
     });
-  });
+  } else {
+    console.log('Working...');
+    showNoPostsLikedView();
+  }
 }
 
 async function renderPost(data) {
@@ -75,8 +83,19 @@ function unlikePost(id)
 
     localStorage.setItem('likedPostsId', likedPosts);
 
+    if (!document.querySelector('#post-id'))
+    {
+      showNoPostsLikedView();
+    }
+
 
   });
 
 }
 
+function showNoPostsLikedView()
+{
+  const postContainer = document.querySelector('.post-container-area');
+
+  postContainer.innerHTML += '<h2 align="center">Nenhum post salvo!</h2>';
+}
