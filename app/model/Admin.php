@@ -106,9 +106,21 @@ class Admin extends Model
 
     }
 
-    public static function deleteAdmin($id)
+    public static function deleteAdmin(int $id)
     {
-        self::database()
-        ->query("DELETE FROM admins WHERE id=$id");
+        try {
+            self::database()
+            ->query("DELETE FROM admins WHERE id=$id");
+            return true;
+        } catch(Exception) {
+            return false;
+        }
+    }
+
+    public static function getAllAdmins()
+    {
+        return self::database()
+        ->query("SELECT id, email, username FROM admins")
+        ->fetch_all(MYSQLI_ASSOC);
     }
 }

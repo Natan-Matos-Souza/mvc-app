@@ -27,7 +27,7 @@ class Post extends View
 
     public function destroy($request, $response)
     {
-        if (!$_SESSION['admin'] && !$_SESSION['canDeletePosts'])
+        if (!$_SESSION['canDeletePosts'])
         {
             return $response
             ->withStatus(401);
@@ -50,6 +50,14 @@ class Post extends View
 
     public function delete($request, $response, $args)
     {
+        if (!$_SESSION['canDeletePosts'])
+        {
+            FlashMessage::createErrorMessage('Você não possui permissão!');
+
+            return $response
+            ->withHeader('Location', 'http://localhost/dashboard')
+            ->withStatus(301);
+        }
 
         $posts = Posts::getAllPosts(25);
 
@@ -88,7 +96,7 @@ class Post extends View
 
     public function create($request, $response)
     {
-        if (!$_SESSION['admin'] && !$_SESSION['canCreatePosts'])
+        if (!$_SESSION['canCreatePosts'])
         {
             FlashMessage::createErrorMessage('Você não possui permissão');
             return $response->withHeader('Location', 'http://localhost:8082/dashboard')
@@ -109,7 +117,7 @@ class Post extends View
 
     public function store($request, $response)
     {
-        if (!$_SESSION['admin'] && !$_SESSION['canCreatePosts'])
+        if (!$_SESSION['canCreatePosts'])
         {
             FlashMessage::createErrorMessage('Você não possui permissão');
             $response->withHeader('Location', 'http://localhost:8082/dashboard')

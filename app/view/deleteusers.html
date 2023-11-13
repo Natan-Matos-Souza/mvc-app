@@ -1,0 +1,30 @@
+{% extends 'templates/dashboardtemplate.html' %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="/assets/style/delete.css">
+
+    <div class="post-container-area">
+
+        {% for user in users %}
+
+            
+
+        <div class="post-container" id="user-{{ user['id'] }}">
+
+            <div class="delete-btn-area">
+                <img src="/assets/icons/trash.png" alt="like button" class="delete-btn">
+            </div>
+
+            <div class="post-info-area">
+                <span>{{ user['username'] }} - {{ user['email'] }}</span>
+            </div>
+        </div>
+            
+
+        {% endfor %}
+
+    </div>
+
+    <script src="/assets/js/deleteuser.js"></script>
+{% endblock %}

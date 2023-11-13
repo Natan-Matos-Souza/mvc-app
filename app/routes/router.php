@@ -18,6 +18,8 @@ $app->post('/dashboard/post', '\app\controller\Post:store');
 $app->delete('/dashboard/post/apagar', '\app\controller\Post:destroy');
 $app->get('/dashboard/post/apagar', '\app\controller\Post:delete');
 $app->get('/dashboard/user', '\app\controller\Admin:create');
+$app->get('/dashboard/user/apagar', '\app\controller\Admin:delete');
+$app->delete('/dashboard/user/apagar', '\app\controller\Admin:destroy');
 
 
 $app->get('/api/posts/{id}', '\app\controller\PostsApi:list');
