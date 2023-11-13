@@ -79,3 +79,27 @@ likeBtn.forEach(element => {
 });
 
 updateView();
+
+//Style
+
+const seePostBtn = document.querySelectorAll('.show-btn-area');
+
+const filledImagePath = '/assets/icons/arrow_left_filled.svg';
+const noFilledImagePath = '/assets/icons/arrow_left.svg';
+
+seePostBtn.forEach(element => {
+    element.addEventListener('mouseover', e => {
+        const target = e.target;
+
+        target.setAttribute('src', filledImagePath);
+
+    });
+
+    element.addEventListener('mouseout', e => {
+        const target = e.target;
+
+        target.setAttribute('src', noFilledImagePath);
+
+    });
+
+});

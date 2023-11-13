@@ -1,0 +1,36 @@
+.post-area {
+    width: 80%;
+    margin: 40px auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+.post-title-area h2{
+    color: #4F4557;
+}
+
+.post-content-area {
+    padding: 20px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    line-height: 32px;
+}
+
+.post-info {
+    text-align: center;
+    font-weight: 300;
+}
+
+.post-info span {
+    display: block;
+}
+
+.post-info strong {
+    color: #4F4557;
+}
+
+
+@media screen and (max-width: 800px) {
+    .post-area {
+        width: 95%;
+    }
+}

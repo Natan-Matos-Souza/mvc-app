@@ -83,11 +83,13 @@ class Post extends View
 
     public function show($request, $response, $args)
     {
+        $post = Posts::getPost($args['id'])[0];
         
+
         $this->setView('post.html');
 
         $this->getView()->render($response, self::$viewName, [
-            "postId" => $args['id']
+            "post" => $post
         ]);
 
         

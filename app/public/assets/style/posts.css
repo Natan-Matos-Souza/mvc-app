@@ -21,6 +21,22 @@
     color: #F4EEE0;   
 }
 
+.show-btn-area {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.show-btn-area img:hover {
+    transition: 500ms;
+    opacity: .5;
+}
+
+.show-btn-area img {
+    transition: 500ms;
+    height: 40px;
+}
+
 .like-btn-area {
     position: absolute;
     right: 0;

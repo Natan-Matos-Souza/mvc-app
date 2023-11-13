@@ -26,7 +26,13 @@
     font-weight: 300;
 }
 
+#username:focus, #useremail:focus, #password:focus
+{
+    outline-color: #4F4557;
+}
+
 #username, #useremail, #password {
+    transition: 1s;
     width: 100%;
     padding: 8px;
     border-radius: 4px;
