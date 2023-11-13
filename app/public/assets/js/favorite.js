@@ -27,6 +27,34 @@ async function getPostsInfo(postsId) {
         renderPost(data);
         setTimeout(() => {
           unlikePost(data.id);
+
+
+          //Style
+
+          const showPostBtn = document.querySelectorAll('.show-btn-area');
+
+          const filledImagePath = '/assets/icons/arrow_left_filled.svg';
+          const noFilledImagePath = '/assets/icons/arrow_left.svg';
+
+          showPostBtn.forEach(element => {
+
+            element.addEventListener('mouseover', e => {
+              const target = e.target;
+
+              target.setAttribute('src', filledImagePath);
+              console.log(target);
+
+            });
+
+            element.addEventListener('mouseout', e => {
+              const target = e.target;
+
+              target.setAttribute('src', noFilledImagePath);
+            });
+
+          });
+
+
         }, 1* 1000);
   
       });
@@ -41,6 +69,10 @@ async function renderPost(data) {
   const postArea = document.querySelector(".post-container-area");
 
   postArea.innerHTML += `<div class="post-container" id="post-${data.id}">
+
+            <a href="http://localhost:8082/posts/${data.id}" class="show-btn-area">
+                <img src="/assets/icons/arrow_left.svg">
+            </a>
 
             <div class="like-btn-area">
                 <img src="/assets/icons/star-fill.svg" alt="like button" class="like-btn">
@@ -67,7 +99,8 @@ function unlikePost(id)
   
   const postContainer = document.getElementById(`post-${id}`);
 
-  const likeBtn = postContainer.firstElementChild.firstElementChild;
+  const likeBtn = postContainer.firstElementChild.nextElementSibling.firstElementChild;
+  console.log(likeBtn);
 
   likeBtn.addEventListener('click', () => {
     postContainer.remove();
@@ -99,3 +132,5 @@ function showNoPostsLikedView()
 
   postContainer.innerHTML += '<h2 align="center">Nenhum post salvo!</h2>';
 }
+
+
