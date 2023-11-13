@@ -1,0 +1,46 @@
+.form-area {
+    background-color: #4F4557;
+    padding: 20px;
+    border-radius: 4px;
+    width: 60%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.email-area, .password-area {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.email-area label, .password-area label {
+    color: #F4EEE0;
+}
+
+.email-area input, .password-area input {
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+}
+
+.email-area input:focus, .password-area input:focus {
+    outline-color: #A7D397;
+}
+
+
+.submit-btn-area {
+    padding: 20px;
+    width: 60%;
+    text-align: center;
+    margin: auto;
+}
+
+.submit-btn-area input {
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: #A7D397;
+    color: #F4EEE0;
+}
