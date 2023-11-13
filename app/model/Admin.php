@@ -91,6 +91,7 @@ class Admin extends Model
             $_SESSION['canCreatePosts'] = $userInfo->can_create_posts;
             $_SESSION['canCreateUsers'] = $userInfo->can_create_users;
             $_SESSION['canDeletePosts'] = $userInfo->can_delete_posts;
+            $_SESSION['canDeleteUsers'] = $userInfo->can_delete_users;
 
             $isValid = true;
 
