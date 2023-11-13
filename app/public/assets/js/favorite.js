@@ -83,7 +83,7 @@ function unlikePost(id)
 
     localStorage.setItem('likedPostsId', likedPosts);
 
-    if (!document.querySelector('#post-id'))
+    if (!document.querySelector('.post-container'))
     {
       showNoPostsLikedView();
     }
