@@ -12,7 +12,7 @@ class Home extends View
     public function index($request, $response)
     {
         
-        $this->setView('index.html');
+        $this->setView('home.html');
 
         $this->getView()->render($response, self::$viewName, [
             "firstName" => "Natan",

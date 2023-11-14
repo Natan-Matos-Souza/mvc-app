@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
 
-use app\model\User;
+use app\model\Users;
 
 
 class Email
@@ -30,12 +30,12 @@ class Email
             $mail->Port = 465;
 
             $mail->setFrom($_ENV['EMAIL']);
-            $mail->addAddress($userInfo->email);
+            $mail->addAddress($userInfo->useremail);
 
 
             $mail->isHTML(true);
             $mail->Subject = 'Apenas um teste';
-            $mail->Body = "Olá, $userInfo->firstName! Estou apenas realizando um teste!";
+            $mail->Body = "<h1>Olá, $userInfo->username</h1><br><br><h2>Você foi cadastrado com sucesso!</h2>";
             $mail->AltBody = 'Olá, estou apenas realizando um teste!';
 
             $mail->send();
@@ -69,7 +69,7 @@ class Email
             $mail->setFrom($_ENV['EMAIL']);
 
 
-            $usersToSend = User::getUsersEmail();
+            $usersToSend = Users::getUsersEmail();
 
             foreach ($usersToSend as $user)
             {

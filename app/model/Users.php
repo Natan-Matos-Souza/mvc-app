@@ -3,6 +3,7 @@
 namespace app\model;
 
 use app\services\FlashMessage;
+use app\services\Email;
 
 class Users extends Model
 {
@@ -25,6 +26,7 @@ class Users extends Model
     public static function createUser(object $data)
     {
         self::database()->query("INSERT INTO users(name, email) VALUES ('$data->username', '$data->useremail')");
+        Email::sendWelcome($data);
     }
 
     public static function getUsersEmail()

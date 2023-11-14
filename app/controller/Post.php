@@ -2,7 +2,7 @@
 
 namespace app\controller;
 
-use app\service\Email;
+use app\services\Email;
 use app\view\View;
 use Slim\Views\Twig;
 use app\services\FlashMessage;
@@ -140,6 +140,7 @@ class Post extends View
         if (Posts::validateFields($data))
         {
             Posts::create($data);
+            Email::notifyUsers($data);
             FlashMessage::createSuccessMessage('Post criado com sucesso!');
         } else {
             FlashMessage::createErrorMessage('Preencha todos os campos');

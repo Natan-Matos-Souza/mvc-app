@@ -1,0 +1,126 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.page-logo {
+    width: 80%;
+    text-align: center;
+    margin: 40px auto;
+    color: #4F4557;
+}
+
+.page-logo img {
+    height: 100px;
+    margin: 8px auto;
+}
+
+.page-description {
+    width: 100%;
+    margin: 120px auto 0px;
+}
+
+.page-description-title {
+    text-align: center;
+}
+
+.page-content-money, .page-content-email
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    gap: 80px;
+    width: 80%;
+    margin: auto;
+    margin: 80px auto;
+    color: #4F4557;
+}
+
+.page-content-money img:hover, .page-content-email img:hover {
+    transition: 1s;
+    animation: floatAnimation 2s linear infinite !important;
+}
+
+.page-content-money img, .page-content-email img {
+    transition: 1s;
+    height: 200px;
+}
+
+/* Right */
+
+.page-content-world
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 80px;
+    width: 80%;
+    margin: auto;
+    margin: 80px auto;
+    color: #4F4557;
+}
+
+.page-content-world img {
+    height: 200px;
+}
+
+
+@media screen and (max-width: 800px) {
+    .page-content-money, .page-content-email
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        width: 80%;
+        margin: auto;
+        margin: 80px auto;
+        color: #4F4557;
+    }
+
+    .page-content-money img:hover, .page-content-email img:hover {
+        transition: 1s;
+        animation: floatAnimation 4s linear infinite;
+    }
+
+    .page-content-money img, .page-content-email img {
+        transition: 1s;
+        height: 100px;
+    }
+
+    /* Right */
+
+    .page-content-world
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        width: 80%;
+        margin: auto;
+        margin: 80px auto;
+        color: #4F4557;
+    }
+
+    .page-content-world img {
+        height: 100px;
+    }
+}
+
+@keyframes floatAnimation {
+    0% {
+        position: relative;
+        bottom: 0px;
+    }
+
+    25% {
+        bottom: 50px;
+    }
+
+    50% {
+        bottom: 0px;
+    }
+}
