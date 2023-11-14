@@ -23,6 +23,10 @@
     text-align: center;
 }
 
+.page-description-title h1 {
+    color: #4F4557;
+}
+
 .page-content-money, .page-content-email
 {
     display: flex;
@@ -31,9 +35,11 @@
     justify-content: left;
     gap: 80px;
     width: 80%;
-    margin: auto;
     margin: 80px auto;
-    color: #4F4557;
+    color: #FFF;
+    background-color: #4F4557;
+    padding: 40px;
+    border-radius: 4px;
 }
 
 .page-content-money img:hover, .page-content-email img:hover {
@@ -56,13 +62,23 @@
     justify-content: right;
     gap: 80px;
     width: 80%;
-    margin: auto;
     margin: 80px auto;
-    color: #4F4557;
+    border-radius: 4px;
+    color: #FFF;
+    background-color: #4F4557;
+    padding: 40px;
 }
 
 .page-content-world img {
     height: 200px;
+}
+
+.first-horizontal-row, .second-horizontal-row {
+    width: 60%;
+    margin: auto;
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #4F4557;
 }
 
 
@@ -77,7 +93,7 @@
         width: 80%;
         margin: auto;
         margin: 80px auto;
-        color: #4F4557;
+        color: #FFF;
     }
 
     .page-content-money img:hover, .page-content-email img:hover {
@@ -102,7 +118,11 @@
         width: 80%;
         margin: auto;
         margin: 80px auto;
-        color: #4F4557;
+        color: #FFF;
+    }
+
+    .page-content-world img:hover {
+        animation: floatAnimation 4s linear infinite;
     }
 
     .page-content-world img {
@@ -110,17 +130,3 @@
     }
 }
 
-@keyframes floatAnimation {
-    0% {
-        position: relative;
-        bottom: 0px;
-    }
-
-    25% {
-        bottom: 50px;
-    }
-
-    50% {
-        bottom: 0px;
-    }
-}

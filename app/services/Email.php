@@ -79,8 +79,8 @@ class Email
 
 
             $mail->isHTML(true);
-            $mail->Subject = 'Apenas um teste';
-            $mail->Body = "Olá! Estou apenas realizando um teste!";
+            $mail->Subject = 'Nova Publicação Realizada';
+            $mail->Body = "Olá! Temos novidades na plataforma. Venha conferir! Link: http://localhost:8082/posts/$postData->id";
             $mail->AltBody = 'Olá, estou apenas realizando um teste!';
 
             $mail->send();
