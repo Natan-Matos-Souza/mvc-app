@@ -5,18 +5,25 @@ namespace app\model;
 use app\services\FlashMessage;
 use app\services\Email;
 
-class Users extends Model
+class Users extends Database
 {
-    public static function isValid(object $data)
+    public static function validateEmail(object $data)
     {
 
         $isValid = false;
 
         if (filter_var($data->useremail, FILTER_VALIDATE_EMAIL))
         {
-            $findEmail = self::database()->query("SELECT * FROM users WHERE email='$data->useremail'");
+            $query = "SELECT * FROM users WHERE email=?"; //Prepara query para procurar e-mail
 
-            (!$findEmail->num_rows > 0) ? $isValid = true : FlashMessage::createErrorMessage('E-mail já cadastrado!');
+            $stmt = self::database()->prepare($query);
+
+            $stmt->execute([
+                $data->useremail
+            ]);
+
+            $stmt->rowCount() < 1 ?  $isValid = true : FlashMessage::createErrorMessage('Email já cadastrado!');
+
         }
 
         return $isValid;
@@ -25,13 +32,24 @@ class Users extends Model
 
     public static function createUser(object $data)
     {
-        self::database()->query("INSERT INTO users(name, email) VALUES ('$data->username', '$data->useremail')");
+        $query = "INSERT INTO users(name, email) VALUES (?, ?)";
+
+        $stmt = self::database()->prepare($query);
+
+        $stmt->execute([
+            $data->username,
+            $data->useremail
+        ]);
+        
         Email::sendWelcome($data);
     }
 
     public static function getUsersEmail()
     {
-        $data = self::database()->query('SELECT email from users')->fetch_all(MYSQLI_ASSOC);
-        return $data;
+
+        $stmt = self::database()->prepare("SELECT email FROM users");
+        $stmt->execute();
+
+        return $stmt->fetchAll();
     }
 }

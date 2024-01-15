@@ -10,11 +10,7 @@ class Logout
     {
         if ($_SESSION['admin'])
         {
-            $_SESSION['admin'] = false;
-            $_SESSION['canCreateUsers'] = false;
-            $_SESSION['canCreatePosts'] = false;
-            $_SESSION['canDeletePosts'] = false;
-            
+            session_destroy();
             FlashMessage::createSuccessMessage('Logout realizado com sucesso!');
         }
 

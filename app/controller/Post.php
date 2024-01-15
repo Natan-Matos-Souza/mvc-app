@@ -108,10 +108,10 @@ class Post extends View
         $this->setView('createpost.html');
 
         $this->getView()->render($response, self::$viewName, [
-            "userName" => $_SESSION['adminUsername'],
-            "hasFlashMessage" => FlashMessage::hasFlashMessage(),
-            "flashMessageType" => FlashMessage::showFlashMessageType(),
-            "flashMessageText" => FlashMessage::showFlashMessage()
+            "userName"          => $_SESSION['adminUsername'],
+            "hasFlashMessage"   => FlashMessage::hasFlashMessage(),
+            "flashMessageType"  => FlashMessage::showFlashMessageType(),
+            "flashMessageText"  => FlashMessage::showFlashMessage()
         ]);
 
         return $response;
@@ -130,10 +130,10 @@ class Post extends View
         $formData = $request->getParsedBody();
 
         $data = (object) [
-            "postTitle" => $formData['post-title'],
-            "postContent" => $formData['post-content'],
-            "postAuthor" => $_SESSION['adminUsername'],
-            "postDate" => date('Y/m/d')
+            "postTitle"     => $formData['post-title'],
+            "postContent"   => $formData['post-content'],
+            "postAuthor"    => $_SESSION['adminUsername'],
+            "postDate"      => date('Y/m/d')
         ];
 
 

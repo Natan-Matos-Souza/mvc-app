@@ -6,8 +6,6 @@ use app\model\Admin;
 use app\services\FlashMessage;
 use app\view\View;
 
-use Slim\Routing\RouteContext;
-
 class Login extends View
 {
     public function index($request, $response)
@@ -15,9 +13,9 @@ class Login extends View
         $this->setView('login.html');
 
         $this->getView()->render($response, self::$viewName, [
-            "hasFlashMessage" => FlashMessage::hasFlashMessage(),
-            "flashMessageType" => FlashMessage::showFlashMessageType(),
-            "flashMessageText" => FlashMessage::showFlashMessage()
+            "hasFlashMessage"   => FlashMessage::hasFlashMessage(),
+            "flashMessageType"  => FlashMessage::showFlashMessageType(),
+            "flashMessageText"  => FlashMessage::showFlashMessage()
         ]);
 
         FlashMessage::destroy();
@@ -32,16 +30,15 @@ class Login extends View
         
         FlashMessage::createErrorMessage('Dados inválidos!');
 
-        if (Admin::isValid($userData))
+        if (Admin::authenticate($userData))
         {
             FlashMessage::createSuccessMessage('Usuário válido!');
             return $response
             ->withHeader('Location', 'http://localhost:8082/dashboard')
             ->withStatus(302);
-        } else {
-            FlashMessage::createErrorMessage('Usuário inválido!');
         }
-
+        
+        FlashMessage::createErrorMessage('Usuário inválido!');
 
         return $response
         ->withHeader('Location', 'http://localhost:8082/login')

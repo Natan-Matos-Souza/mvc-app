@@ -12,12 +12,12 @@ class Admin extends View
     public function destroy($request, $response)
     {
 
-        // if (!$_SESSION['canDeleteUsers'])
-        // {
-        //     return $response
-        //     ->withHeader('Location', 'http://localhost:8082/dashboard')
-        //     ->withStatus(301);
-        // }
+        if (!$_SESSION['canDeleteUsers'])
+        {
+            return $response
+            ->withHeader('Location', 'http://localhost:8082/dashboard')
+            ->withStatus(301);
+        }
 
         $userId = explode('=', $request->getBody()->getContents())[1];
 

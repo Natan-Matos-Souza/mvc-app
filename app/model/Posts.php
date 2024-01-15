@@ -2,20 +2,18 @@
 
 namespace app\model;
 
-class Posts extends Model
+class Posts extends Database
 {
 
     public static function deletePost(int $id)
     {
-        try {
-            self::database()
-            ->query("DELETE FROM posts WHERE id=$id");
+        $query = "DELETE FROM posts WHERE id=?";
+        
+        $stmt = self::database()->prepare($query);
+        $stmt->execute([
+            $id
+        ]);
 
-            return true;
-        } catch (Exception $e)
-        {
-            return false;
-        }
     }
 
     public static function validateFields(object $data)
@@ -24,10 +22,7 @@ class Posts extends Model
 
         foreach ($data as $field => $content)
         {
-            if (!$content)
-            {
-                $isValid = false;
-            }
+            if (!$content) $isValid = false;
         }
 
         return $isValid;
@@ -35,71 +30,62 @@ class Posts extends Model
 
     public static function getPost(int $id, $limit=0)
     {
+        $query = "SELECT * FROM posts WHERE id=?";
+        $stmt = self::database()->prepare($query);
+        $stmt->execute([
+            $id
+        ]);
+
         if ($limit)
         {
+            $data = $stmt->fetchAll();
 
-            $data = self::database()
-                ->query("SELECT * FROM posts WHERE id='$id'")
-                ->fetch_all(MYSQLI_ASSOC);
-
-            foreach ($data as $post => $content)
+            foreach($data as $post)
             {
-                foreach ($data[$post] as $key => $content)
-                {
-                    if ($key == 'post_content' || $key == 'post_title')
-                    {
-                        $data[$post][$key] = mb_strimwidth($data[$post][$key], 0, $limit, '...');
-                    }
-                }
+                $post->post_title = mb_strimwidth($post->post_title, 0, $limit);
+                $post->post_content = mb_strimwidth($post->post_content, 0, $limit);
             }
 
             return $data;
-
-        } else {
-            return self::database()
-            ->query("SELECT * FROM posts WHERE id='$id'")
-            ->fetch_all(MYSQLI_ASSOC);
         }
+        
+        return $stmt->fetchAll();
     }
 
     public static function create(object $data)
     {
-        self::database()
-        ->query("INSERT INTO posts(post_author, post_title, post_content, post_data) VALUES (
-            '$data->postAuthor',
-            '$data->postTitle',
-            '$data->postContent',
-            '$data->postDate'
-            )");
+        $query = "INSERT INTO posts(post_author, post_title, post_content, post_data) VALUES (?, ?, ?, ?)";
+        $stmt = self::database()->prepare($query);
+        $stmt->execute([
+            $data->postAuthor,
+            $data->postTitle,
+            $data->postContent,
+            $data->postData
+        ]);
     }
 
     public static function getAllPosts(int $limit = 0): array
     {
+
+        $query = "SELECT * FROM posts";
+        $stmt = self::database()->prepare($query);
+        $stmt->execute();
+
+
         if ($limit)
         {
-            $posts = self::database()
-            ->query("SELECT * FROM posts")
-            ->fetch_all(MYSQLI_ASSOC);
+            $posts = $stmt->fetchAll();
 
-
-            foreach ($posts as $post => $data)
+            foreach($posts as $post)
             {
-                foreach($posts[$post] as $key => $data)
-                {
-                    if ($key == 'post_content' || $key == 'post_title')
-                    {
-                        $posts[$post][$key] = mb_strimwidth($posts[$post][$key], 0, $limit, '...');
-                    }
-                }
+                $post->post_content = mb_strimwidth($post->post_content, 0, $limit);
+                $post->post_title = mb_strimwidth($post->post_title, 0, $limit);
             }
 
             return $posts;
-
-        } else {
-            return $posts = self::database()
-            ->query("SELECT * FROM posts")
-            ->fetch_all(MYSQLI_ASSOC);
         }
 
+        return $stmt->fetchAll();
     }
+
 }

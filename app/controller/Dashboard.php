@@ -20,10 +20,10 @@ class Dashboard extends View
 
 
         $this->getView()->render($response, self::$viewName, [
-            "userName" => $_SESSION['adminUsername'],
-            "hasFlashMessage" => FlashMessage::hasFlashMessage(),
-            "flashMessageType" => FlashMessage::showFlashMessageType(),
-            "flashMessageText" => FlashMessage::showFlashMessage()
+            "userName"          => $_SESSION['adminUsername'],
+            "hasFlashMessage"   => FlashMessage::hasFlashMessage(),
+            "flashMessageType"  => FlashMessage::showFlashMessageType(),
+            "flashMessageText"  => FlashMessage::showFlashMessage()
         ]);
 
         FlashMessage::destroy();

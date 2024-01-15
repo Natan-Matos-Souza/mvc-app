@@ -30,7 +30,7 @@ class User extends View
     {
         $data = (object) $request->getParsedBody();
 
-        if (Users::isValid($data))
+        if (Users::validateEmail($data))
         {
             Users::createUser($data);
             FlashMessage::createSuccessMessage('Usuário criado com sucesso!');

@@ -9,12 +9,19 @@ Para utilizar esse projeto é necessário ter o **_Composer_** instalado em sua 
 
 Para instalar todas as dependências, digite em seu terminal:
 
-    composer install
+````bash
+composer install
+````
+
 
 Após isso, inicie a aplicação com o comando:
 
-     php -S localhost:8082 -t app/public
+````bash
+php -S localhost:8082 -t app/public
+````
 
 Para que a aplicação funcione corretamente, é necessário utilizar a **_migration_** do projeto. Para isso, certifique-se de que todas as informações do banco de dados MySQL estejam declaradas no arquivo **_.env_** e execute o comando:
         
-    php migration.php create
+````bash
+php migration.php create
+````

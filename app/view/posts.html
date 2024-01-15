@@ -12,9 +12,9 @@
 
                 
 
-            <div class="post-container" id="post-{{ post['id'] }}">
+            <div class="post-container" id="post-{{ post.id }}">
 
-                <a href="http://localhost:8082/posts/{{ post['id'] }}" class="show-btn-area">
+                <a href="http://localhost:8082/posts/{{ post.id }}" class="show-btn-area">
                     <img src="/assets/icons/arrow_left.svg" alt="See">
                 </a>
 
@@ -23,15 +23,15 @@
                 </div>
 
                 <div class="post-title-area">
-                    <h2>{{ post['post_title'] }}</h2>
+                    <h2>{{ post.post_title }}</h2>
                 </div>
 
                 <div class="post-content-area">
-                    <p>{{ post['post_content'] }}</p>
+                    <p>{{ post.post_content }}</p>
                 </div>
 
                 <div class="post-info-area">
-                    <span>{{ post['post_author'] }} - {{ post['post_data'] }}</span>
+                    <span>{{ post.post_author }} - {{ post.post_data }}</span>
                 </div>
             </div>
                 

@@ -24,7 +24,7 @@ class Email
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = $_ENV['EMAIL'];
-            $mail->Password = $_ENV['EMAILPASS'];
+            $mail->Password = $_ENV['EMAIL_PASS'];
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->SMTPAuth = true;
             $mail->Port = 465;

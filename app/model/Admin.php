@@ -4,9 +4,8 @@ namespace app\model;
 
 use app\services\FlashMessage;
 
-class Admin extends Model
+class Admin extends Database
 {
-
     public static function isDataValid(object $data)
     {
         $isValid = true;
@@ -29,65 +28,77 @@ class Admin extends Model
 
     }
 
-    public static function createAdmin(object $data)
+    public static function createAdmin(object $data): bool
     {
         $data->password = password_hash($data->password, PASSWORD_BCRYPT);
 
-        $findEmail = self::database()
-        ->query("SELECT email FROM admins WHERE email='$data->useremail'");
+        $query = "SELECT email FROM admins WHERE email=?";
 
-        if (!$findEmail->num_rows > 0)
+        $stmt = self::database()->prepare($query);
+        $stmt->execute([
+            $data->useremail
+        ]);
+
+        if ($stmt->rowCount() < 1)
         {
-            self::database()
-            ->query(
-                "INSERT INTO admins (
-                    email,
-                    username,
-                    password,
-                    can_create_posts,
-                    can_delete_posts,
-                    can_create_users,
-                    can_delete_users
-                ) VALUES (
-                    '$data->useremail',
-                    '$data->username',
-                    '$data->password',
-                    '$data->canCreatePosts',
-                    '$data->canDeletePosts',
-                    '$data->canCreateUsers',
-                    '$data->canDeleteUsers'
-                )"
-            );
+
+            $query = "INSERT INTO admins (
+                email,
+                username,
+                password,
+                can_create_posts,
+                can_delete_posts,
+                can_create_users,
+                can_delete_users
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            $stmt->execute([
+                $data->useremail,
+                $data->username,
+                $data->password,
+                $data->canCreatePosts,
+                $data->canDeletePosts,
+                $data->canCreateUsers,
+                $data->canDeleteUsers
+            ]);
 
             FlashMessage::createSuccessMessage('Usuário criado com sucesso!');
-        } else {
-            FlashMessage::createErrorMessage('E-mail já cadastrado!');
+
+            return true;
         }
+
+        FlashMessage::createErrorMessage('E-mail já cadastrado!');
+        return false;
     }
 
-    public static function isValid(object $data)
+    public static function authenticate(object $data): bool
     {
         $isValid = false;
-        
 
-        $findUser = self::database()->query("SELECT password from admins WHERE email='$data->email'");
+        $findUserByEmailQuery = "SELECT id, password from admins WHERE email=?";
+        $findUserByEmailStmt = self::database()->prepare($findUserByEmailQuery);
+        $findUserByEmailStmt->execute([
+            $data->email
+        ]);
 
-        if ($findUser->num_rows < 1)
-        {
-            return $isValid = false;
-        }
+        if ($findUserByEmailStmt->rowCount() < 1) return $isValid;
 
-        $userPassword = (object) $findUser->fetch_array(MYSQLI_ASSOC);
+        $userPassword = $findUserByEmailStmt->fetch();
 
 
         if (password_verify($data->password, $userPassword->password))
         {
             
-            $userInfo = (object) self::database()->query("SELECT * from admins WHERE email='$data->email'")->fetch_array(MYSQLI_ASSOC);
+            $query = "SELECT * from admins WHERE id=?";
+            $getUserInfoStmt = self::database()->prepare($query);
+            $getUserInfoStmt->execute([
+                $userPassword->id
+            ]);
 
+            $userInfo = $getUserInfoStmt->fetch();
 
             $_SESSION['admin'] = true;
-            $_SESSION['adminUsername'] = $userInfo->username;
+            $_SESSION['adminUsername']  = $userInfo->username;
             $_SESSION['canCreatePosts'] = $userInfo->can_create_posts;
             $_SESSION['canCreateUsers'] = $userInfo->can_create_users;
             $_SESSION['canDeletePosts'] = $userInfo->can_delete_posts;
@@ -95,33 +106,33 @@ class Admin extends Model
 
             $isValid = true;
 
-            var_dump($_SESSION['canCreateUsers']);
-
             return $isValid;
             
 
 
-        } else {
-            return $isValid = false;
         }
+        
+        return $isValid = false;
 
     }
 
     public static function deleteAdmin(int $id)
     {
-        try {
-            self::database()
-            ->query("DELETE FROM admins WHERE id=$id");
-            return true;
-        } catch(Exception) {
-            return false;
-        }
+       $query = "DELETE FROM users WHERE id=?";
+
+       $stmt = self::database()->prepare($query);
+       $stmt->execute([
+        $id
+       ]);
+
     }
 
     public static function getAllAdmins()
     {
-        return self::database()
-        ->query("SELECT id, email, username FROM admins")
-        ->fetch_all(MYSQLI_ASSOC);
+        $stmt = self::database()->prepare("SELECT id, email, username FROM admins");
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
     }
 }
