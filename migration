@@ -1,0 +1,114 @@
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+echo "Migration Service:" . PHP_EOL;
+echo "Comandos disponíveis:" . PHP_EOL;
+echo PHP_EOL;
+echo "up        - Cria uma tabela no banco de dados" . PHP_EOL;
+echo "delete    - Apaga a migration no banco de dados" . PHP_EOL;
+
+echo PHP_EOL;
+
+$defaultAdminConfig = [
+    'email'     => 'admin@admin.com',
+    'username'  => 'admin',
+    'password'  => password_hash('admin', PASSWORD_BCRYPT)
+];
+
+$command = mb_strtolower(readline("Digite um comando: " . PHP_EOL));
+
+try
+{
+    $database = app\model\Database::database();
+} catch(PDOException $e)
+{
+    echo "Erro durante a conexão com o banco de dados. Verifique se você preencheu o arquivo '.env' corretamente." . PHP_EOL;
+    echo "Motivo do erro: {$e->getMessage()}" . PHP_EOL;
+}
+
+switch($command)
+{
+    case 'up':
+
+        $databaseQueries = [
+            "CREATE TABLE users(
+
+                id int not null auto_increment,
+                name varchar(60),
+                email varchar(60),
+                primary key(id)
+                
+                );",
+
+            "CREATE TABLE posts(
+
+                id int not null auto_increment,
+                post_author varchar(60),
+                post_title varchar(60),
+                post_content longtext,
+                post_data date,
+                primary key(id)
+                );",
+
+            "CREATE TABLE admins(
+                id int not null auto_increment,
+                email varchar(60),
+                username varchar(60),
+                password varchar(60),
+                can_create_posts boolean,
+                can_delete_posts boolean,
+                can_create_users boolean,
+                can_delete_users boolean,
+                primary key(id)
+                
+                );",
+
+                "INSERT INTO admins (
+                    email,
+                    username,
+                    password,
+                    can_create_posts,
+                    can_delete_posts,
+                    can_create_users,
+                    can_delete_users
+                ) VALUES (
+                    '$defaultAdminConfig[email]',
+                    '$defaultAdminConfig[username]',
+                    '$defaultAdminConfig[password]',
+                    1,
+                    1,
+                    1,
+                    1
+                );"
+        ];
+
+        foreach($databaseQueries as $query)
+        {
+            $database->exec($query);
+        }
+
+        break;
+    
+    case 'delete':
+        $choice = readline("Essa operação é irreversível. Tem certeza que deseja prosseguir?(s/n)");
+
+        switch($choice)
+        {
+            case 's':
+                $database->exec("DROP DATABASE $_ENV[DATABASE]");
+                break;
+        }
+
+        break;
+    
+    default:
+        
+        echo "Comando inválido!";
+        
+}

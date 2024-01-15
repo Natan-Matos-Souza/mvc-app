@@ -60,7 +60,7 @@ class Posts extends Database
             $data->postAuthor,
             $data->postTitle,
             $data->postContent,
-            $data->postData
+            $data->postDate
         ]);
     }
 

@@ -52,6 +52,8 @@ class Admin extends Database
                 can_delete_users
             ) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
+            $stmt = self::database()->prepare($query);
+
             $stmt->execute([
                 $data->useremail,
                 $data->username,
