@@ -23,5 +23,5 @@ php -S localhost:8082 -t app/public
 Para que a aplicação funcione corretamente, é necessário utilizar a **_migration_** do projeto. Para isso, certifique-se de que todas as informações do banco de dados MySQL estejam declaradas no arquivo **_.env_** e execute o comando:
         
 ````bash
-php migration.php create
+php migration.php
 ````
