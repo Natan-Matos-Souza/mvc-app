@@ -25,3 +25,4 @@ Para que a aplicação funcione corretamente, é necessário utilizar a **_migra
 ````bash
 php migration.php
 ````
+Teste
